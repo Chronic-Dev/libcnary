@@ -1,12 +1,12 @@
 /*
- * node.c
+ * node.h
  *
  *  Created on: Mar 7, 2011
  *      Author: posixninja
  */
 
-#include "node.h"
+#ifndef NODE_H_
+#define NODE_H_
 
-int one() {
-	return 1;
-}
+
+#endif /* NODE_H_ */
