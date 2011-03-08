@@ -21,7 +21,7 @@ typedef struct node_list_t {
 
 } node_list_t;
 
-void node_list_destroy(struct node_list_t* list);
+void node_list_destroy(node_list_t* list);
 node_list_t* node_list_create(struct node_t* node);
 
 #endif /* NODE_LIST_H_ */
