@@ -1,2 +1,4 @@
 /node.h
 .DS_Store
+libcnary.a
+*.o
