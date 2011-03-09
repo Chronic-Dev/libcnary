@@ -9,10 +9,10 @@
 #define ITERATOR_H_
 
 struct list_t;
+struct object_t;
+
 typedef struct iterator_t {
-	void*(*create)(void);
-	int(*free)(struct iterator_t* iterator);
-	int(*next)(struct iterator_t* iterator);
+	struct object_t*(*next)(struct iterator_t* iterator);
 	int(*bind)(struct iterator_t* iterator, struct list_t* list);
 
 	unsigned int count;
@@ -23,5 +23,11 @@ typedef struct iterator_t {
 	struct object_t* begin;
 	struct object_t* value;
 } iterator_t;
+
+void iterator_destroy(struct iterator_t* iterator);
+struct iterator_t* iterator_create(struct list_t* list);
+
+struct object_t* iterator_next(struct iterator_t* iterator);
+int iterator_bind(struct iterator_t* iterator, struct list_t* list);
 
 #endif /* ITERATOR_H_ */

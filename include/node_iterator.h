@@ -16,9 +16,7 @@ typedef struct node_iterator_t {
 	struct iterator_t super;
 
 	// Local members
-	void*(*create)(void);
-	int(*free)(struct node_iterator_t* iterator);
-	int(*next)(struct node_iterator_t* iterator);
+	struct node_t*(*next)(struct node_iterator_t* iterator);
 	int(*bind)(struct node_iterator_t* iterator, struct node_list_t* list);
 
 	unsigned int count;
@@ -33,5 +31,8 @@ typedef struct node_iterator_t {
 
 void node_iterator_destroy(node_iterator_t* iterator);
 node_iterator_t* node_iterator_create(node_list_t* list);
+
+struct node_t* node_iterator_next(struct node_iterator_t* iterator);
+int node_iterator_bind(struct node_iterator_t* iterator, struct node_list_t* list);
 
 #endif /* NODE_ITERATOR_H_ */
