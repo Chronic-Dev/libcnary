@@ -18,6 +18,9 @@ int main(int argc, char* argv[]) {
 	puts("Creating child 2 node");
 	node_t* two = node_create(root);
 
+	puts("Creating child 3 node");
+	node_t* three = node_create(one);
+
 	puts("Debugging root node");
 	node_debug(root);
 

@@ -55,6 +55,9 @@ int node_attach(node_t* parent, node_t* child) {
 	child->isRoot = FALSE;
 	child->parent = parent;
 	child->depth = parent->depth + 1;
+	if(parent->isLeaf == TRUE) {
+		parent->isLeaf = FALSE;
+	}
 	return node_list_add(parent->children, child);
 }
 
@@ -63,21 +66,27 @@ int node_detach(node_t* parent, node_t* child) {
 }
 
 void node_debug(node_t* node) {
+	int i = 0;
 	node_t* current = NULL;
 	node_iterator_t* iter = NULL;
+	for(i = 0; i < node->depth; i++) {
+		printf("\t");
+	}
 	if(node->isRoot) {
 		printf("ROOT\n");
+	}
+
+	if(node->isLeaf && !node->isRoot) {
+		printf("LEAF\n");
 
 	} else {
-		if(node->isLeaf) {
-			printf("LEAF\n");
-
-		} else {
+		if(!node->isRoot) {
 			printf("NODE\n");
-			iter = node_iterator_create(node->children);
-			for(current = iter->begin; current != NULL; current = iter->next(iter)) {
-				node_debug(current);
-			}
+		}
+		iter = node_iterator_create(node->children);
+		for(current = iter->begin; current != NULL; current = iter->next(iter)) {
+			node_debug(current);
 		}
 	}
+
 }

@@ -2,7 +2,7 @@ TARGET = cnary
 LIBRARY = libcnary.a
 OBJECTS = cnary.o libcnary.a
 LIBRARY_OBJECTS = node.o list.o iterator.o node_list.o node_iterator.o
-CFLAGS=-I./include -I/opt/local/include -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
+CFLAGS=-g -I./include -I/opt/local/include -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
 LDFLAGS=-L/opt/local/lib -framework CoreFoundation -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk -Wl,-no_compact_linkedit
 
 
