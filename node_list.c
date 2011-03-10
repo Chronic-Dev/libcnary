@@ -14,9 +14,8 @@
 #include "node_list.h"
 
 void node_list_destroy(node_list_t* list) {
-	if(list) {
-		list_free(list);
-		free(list);
+	if(list != NULL) {
+		list_destroy((list_t*) list);
 	}
 }
 
@@ -32,3 +31,27 @@ node_list_t* node_list_create(node_t* node) {
 	list->count = 0;
 	return list;
 }
+
+int node_list_add(node_list_t* list, node_t* node) {
+	// Find the last element in the list
+	node_t* last = list->end;
+
+	// Setup our new node as the new last element
+	node->next = NULL;
+	node->prev = last;
+
+	// Set the next element of our old "last" element
+	last->next = node;
+
+	// Set the lists prev to the new last element
+	list->end = node;
+
+	// Increment our node count for this list
+	list->count++;
+	return 0;
+}
+
+int node_list_remove(node_list_t* list, node_t* node) {
+	return -1;
+}
+

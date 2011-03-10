@@ -8,6 +8,14 @@
 #ifndef OBJECT_H_
 #define OBJECT_H_
 
+#ifndef TRUE
+#define TRUE 1
+#endif
+
+#ifndef FALSE
+#define FALSE 0
+#endif
+
 typedef struct object_t {
 	void* value;
 	unsigned int type;

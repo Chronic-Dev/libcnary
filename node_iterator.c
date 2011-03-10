@@ -46,9 +46,17 @@ node_iterator_t* node_iterator_create(node_list_t* list) {
 }
 
 node_t* node_iterator_next(node_iterator_t* iterator) {
-	return NULL;
+	node_t* next = iterator->value->next;
+	iterator->value = next;
+	iterator->position++;
+	return next;
 }
 
 int node_iterator_bind(node_iterator_t* iterator, node_list_t* list) {
-	return -1;
+	iterator->position = 0;
+	iterator->end = list->end;
+	iterator->count = list->count;
+	iterator->begin = list->begin;
+	iterator->value = list->begin;
+	return 0;
 }

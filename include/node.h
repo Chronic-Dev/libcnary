@@ -10,24 +10,38 @@
 
 #include "object.h"
 
+#define NODE_TYPE 1;
+
 struct node_list_t;
 
 // This class implements the abstract iterator class
 typedef struct node_t {
 	// Super class
-	struct object_t super;
+	struct node_t* next;
+	struct node_t* prev;
+	unsigned int count;
+
+	// Local Properties
+	int isRoot;
+	int isLeaf;
 
 	// Local Members
 	unsigned int depth;
 	struct node_t* parent;
 	struct node_list_t* children;
 
+	// Virtual Functions
+	int(*attach)(struct node_t* parent, struct node_t* child);
+	int(*detach)(struct node_t* parent, struct node_t* child);
+
 } node_t;
 
-static void node_destroy(node_t* node);
-static node_t* node_create(node_t* parent);
+void node_destroy(struct node_t* node);
+struct node_t* node_create(struct node_t* parent);
 
-static int node_attach(node_t* parent, node_t* child);
-static int node_detach(node_t* parent, node_t* child);
+int node_attach(struct node_t* parent, struct node_t* child);
+int node_detach(struct node_t* parent, struct node_t* child);
+
+void node_debug(struct node_t* node);
 
 #endif /* NODE_H_ */
