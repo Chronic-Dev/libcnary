@@ -63,6 +63,7 @@ node_t* node_create(node_t* parent, void* data) {
 }
 
 int node_attach(node_t* parent, node_t* child) {
+	if (!parent || !child) return -1;
 	child->isLeaf = TRUE;
 	child->isRoot = FALSE;
 	child->parent = parent;
@@ -70,6 +71,7 @@ int node_attach(node_t* parent, node_t* child) {
 	if(parent->isLeaf == TRUE) {
 		parent->isLeaf = FALSE;
 	}
+	parent->count++;
 	return node_list_add(parent->children, child);
 }
 
