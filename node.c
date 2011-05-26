@@ -18,7 +18,7 @@ void node_destroy(node_t* node) {
 	}
 }
 
-node_t* node_create(node_t* parent) {
+node_t* node_create(node_t* parent, void* data) {
 	int error = 0;
 
 	node_t* node = (node_t*) malloc(sizeof(node_t));
@@ -27,9 +27,11 @@ node_t* node_create(node_t* parent) {
 	}
 	memset(node, '\0', sizeof(node_t));
 
+	node->data = data;
 	node->depth = 0;
 	node->next = NULL;
 	node->prev = NULL;
+	node->count = 0;
 	node->isLeaf = TRUE;
 	node->isRoot = TRUE;
 	node->parent = NULL;

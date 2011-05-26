@@ -26,6 +26,7 @@ typedef struct node_t {
 	int isLeaf;
 
 	// Local Members
+	void *data;
 	unsigned int depth;
 	struct node_t* parent;
 	struct node_list_t* children;
@@ -37,7 +38,7 @@ typedef struct node_t {
 } node_t;
 
 void node_destroy(struct node_t* node);
-struct node_t* node_create(struct node_t* parent);
+struct node_t* node_create(struct node_t* parent, void* data);
 
 int node_attach(struct node_t* parent, struct node_t* child);
 int node_detach(struct node_t* parent, struct node_t* child);
