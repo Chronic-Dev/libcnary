@@ -33,6 +33,8 @@ node_list_t* node_list_create(node_t* node) {
 }
 
 int node_list_add(node_list_t* list, node_t* node) {
+	if (!list || !node) return -1;
+
 	// Find the last element in the list
 	node_t* last = list->end;
 
