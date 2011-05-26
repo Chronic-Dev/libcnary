@@ -53,6 +53,54 @@ int node_list_add(node_list_t* list, node_t* node) {
 	return 0;
 }
 
+int node_list_insert(node_list_t* list, unsigned int index, node_t* node) {
+	if (!list || !node) return -1;
+	if (index >= list->count) {
+		return node_list_add(list, node);
+	}
+
+	// Get the first element in the list
+	node_t* cur = list->begin;
+
+	unsigned int pos = 0;
+	node_t* prev = NULL;
+
+	if (index > 0) {
+		while (pos < index) {
+			prev = cur;
+			cur = cur->next;
+			pos++;
+		}
+	}
+
+	if (prev) {
+		// Set previous node
+		node->prev = prev;
+		// Set next node of our new node to next node of the previous node
+		node->next = prev->next;
+		// Set next node of previous node to our new node
+		prev->next = node;
+	} else {
+		node->prev = NULL;
+		// get old first element in list
+		node->next = list->begin;
+		// set new node as first element in list
+		list->begin = node;
+	}
+
+	if (node->next == NULL) {
+		// Set the lists prev to the new last element
+		list->end = node;
+	} else {
+		// set prev of the new next element to our node
+		node->next->prev = node;
+	}
+
+	// Increment our node count for this list
+	list->count++;
+	return 0;
+}
+
 int node_list_remove(node_list_t* list, node_t* node) {
 	if (!list || !node) return -1;
 	if (list->count == 0) return -1;

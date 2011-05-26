@@ -25,6 +25,7 @@ void node_list_destroy(struct node_list_t* list);
 struct node_list_t* node_list_create(struct node_t* node);
 
 int node_list_add(node_list_t* list, node_t* node);
+int node_list_insert(node_list_t* list, unsigned int index, node_t* node);
 int node_list_remove(node_list_t* list, node_t* node);
 
 #endif /* NODE_LIST_H_ */
