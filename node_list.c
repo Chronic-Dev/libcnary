@@ -54,6 +54,29 @@ int node_list_add(node_list_t* list, node_t* node) {
 }
 
 int node_list_remove(node_list_t* list, node_t* node) {
+	if (!list || !node) return -1;
+	if (list->count == 0) return -1;
+
+	node_t* n;
+	for (n = list->begin; n; n = n->next) {
+		if (node == n) {
+			node_t* newnode = node->next;
+			if (node->prev) {
+				node->prev->next = newnode;
+				if (newnode) {
+					newnode->prev = node->prev;
+				}
+			} else {
+				// we just removed the first element
+				if (newnode) {
+					newnode->prev = NULL;
+				}
+				list->begin = newnode;
+			}
+			list->count--;
+			return 0;
+		}
+	}	
 	return -1;
 }
 
