@@ -9,6 +9,7 @@
 #define NODE_ITERATOR_H_
 
 #include "iterator.h"
+#include "node_list.h"
 
 // This class implements the abstract iterator class
 typedef struct node_iterator_t {
