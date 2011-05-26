@@ -76,6 +76,10 @@ int node_attach(node_t* parent, node_t* child) {
 }
 
 int node_detach(node_t* parent, node_t* child) {
+	if (!parent || !child) return 0;
+	if (node_list_remove(parent->children, child) == 0) {
+		parent->count--;
+	}
 	return 0;
 }
 
