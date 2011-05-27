@@ -51,6 +51,8 @@ node_t* node_prev_sibling(struct node_t* node);
 node_t* node_next_sibling(struct node_t* node);
 int node_child_position(struct node_t* parent, node_t* child);
 
+typedef void* (*copy_func_t)(const void *src);
+node_t* node_copy_deep(node_t* node, copy_func_t copy_func);
 
 void node_debug(struct node_t* node);
 

@@ -189,3 +189,19 @@ int node_child_position(struct node_t* parent, node_t* child)
 	}
 	return index;
 }
+
+node_t* node_copy_deep(node_t* node, copy_func_t copy_func)
+{
+	if (!node) return NULL;
+	void *data;
+	if (copy_func) {
+		data = copy_func(node->data);
+	}
+	node_t* copy = node_create(NULL, data);
+	node_t* ch;
+	for (ch = node_first_child(node); ch; ch = node_next_sibling(ch)) {
+		node_t* cc = node_copy_deep(ch, copy_func);
+		node_attach(copy, cc);
+	}
+	return copy;
+}
