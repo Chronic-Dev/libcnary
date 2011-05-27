@@ -44,6 +44,13 @@ int node_attach(struct node_t* parent, struct node_t* child);
 int node_detach(struct node_t* parent, struct node_t* child);
 int node_insert(struct node_t* parent, unsigned int index, struct node_t* child);
 
+unsigned int node_n_children(struct node_t* node);
+node_t* node_nth_child(struct node_t* node, unsigned int n);
+node_t* node_first_child(struct node_t* node);
+node_t* node_prev_sibling(struct node_t* node);
+node_t* node_next_sibling(struct node_t* node);
+int node_child_position(struct node_t* parent, node_t* child);
+
 
 void node_debug(struct node_t* node);
 

@@ -128,3 +128,64 @@ void node_debug(node_t* node) {
 	}
 
 }
+
+unsigned int node_n_children(struct node_t* node)
+{
+	if (!node) return 0;
+	return node->count;
+}
+
+node_t* node_nth_child(struct node_t* node, unsigned int n)
+{
+	if (!node || !node->children || !node->children->begin) return NULL;
+	int index = 0;
+	int found = 0;
+	node_t *ch;
+	for (ch = node_first_child(node); ch; ch = node_next_sibling(ch)) {
+		if (index++ == n) {
+			found = 1;
+			break;
+		}
+	}
+	if (!found) {
+		return NULL;
+	}
+	return ch;
+}
+
+node_t* node_first_child(struct node_t* node)
+{
+	if (!node || !node->children) return NULL;
+	return node->children->begin;
+}
+
+node_t* node_prev_sibling(struct node_t* node)
+{
+	if (!node) return NULL;
+	return node->prev;
+}
+
+node_t* node_next_sibling(struct node_t* node)
+{
+	if (!node) return NULL;
+	return node->next;
+}
+
+int node_child_position(struct node_t* parent, node_t* child)
+{
+	if (!parent || !parent->children || !parent->children->begin || !child) return -1;
+	int index = 0;
+	int found = 0;
+	node_t *ch;
+	for (ch = node_first_child(parent); ch; ch = node_next_sibling(ch)) {
+		if (ch == child) {
+			found = 1;
+			break;
+		}
+		index++;
+	}
+	if (!found) {
+		return -1;
+	}
+	return index;
+}
