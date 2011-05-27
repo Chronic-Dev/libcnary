@@ -71,8 +71,11 @@ int node_attach(node_t* parent, node_t* child) {
 	if(parent->isLeaf == TRUE) {
 		parent->isLeaf = FALSE;
 	}
-	parent->count++;
-	return node_list_add(parent->children, child);
+	int res = node_list_add(parent->children, child);
+	if (res == 0) {
+		parent->count++;
+	}
+	return res;
 }
 
 int node_detach(node_t* parent, node_t* child) {
