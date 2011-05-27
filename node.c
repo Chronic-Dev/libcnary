@@ -83,6 +83,23 @@ int node_detach(node_t* parent, node_t* child) {
 	return 0;
 }
 
+int node_insert(node_t* parent, unsigned int index, node_t* child)
+{
+	if (!parent || !child) return;
+	child->isLeaf = TRUE;
+	child->isRoot = FALSE;
+	child->parent = parent;
+	child->depth = parent->depth + 1;
+	if(parent->isLeaf == TRUE) {
+		parent->isLeaf = FALSE;
+	}
+	int res = node_list_insert(parent->children, index, child);
+	if (res == 0) {
+		parent->count++;
+	}
+	return res;
+}
+
 void node_debug(node_t* node) {
 	int i = 0;
 	node_t* current = NULL;

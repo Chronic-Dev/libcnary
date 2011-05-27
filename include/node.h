@@ -42,6 +42,8 @@ struct node_t* node_create(struct node_t* parent, void* data);
 
 int node_attach(struct node_t* parent, struct node_t* child);
 int node_detach(struct node_t* parent, struct node_t* child);
+int node_insert(struct node_t* parent, unsigned int index, struct node_t* child);
+
 
 void node_debug(struct node_t* node);
 
